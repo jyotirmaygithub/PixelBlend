@@ -37,7 +37,8 @@ async function downloadimage(){
   const blob = await response.blob();
   FileSaver.saveAs(blob, 'image.jpg');
 }
+# download command =====> npm install file-saver (npm package)
 
-# download command =====> npm install file-save (npm package)
-
-
+# caution --- hide api key
+hide api key -- use environment variable 
+🏗️ create .env.local folder  : create a kind of a variable (apikey_for_React_project  = "write api key in the form of string ")
