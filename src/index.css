@@ -1,13 +1,188 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Dela+Gothic+One&family=Kanit:wght@300&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@500&family=Play&display=swap');
+*{
+    margin:0;
+    padding: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+:root{
+    --boxes-height : 60vh;
+    --boxes-width : 25vw;
+    --border-radius : 20px;
+    --location-font : 'Kanit', sans-serif;
+    --user-font: "Concert One", cursive;
+    --link--font :'Play', sans-serif;
+    --grey-color : #F2F3F4;
+    --grey-hover-color :#E5E7E9;
+    --heading--font : 'Gabarito', cursive;
+
+}
+.universal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.universal2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.big-box-add{
+    padding: 30px;
+    flex-wrap: wrap;
+}
+.single-box{
+    width: var(--boxes-width);
+    height: var(--boxes-height);
+    margin: 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+.image-box,.image-box2{
+    width: var(--boxes-width);
+    height: var(--boxes-height);
+    position: relative;;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+}
+.for-image,.modal{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.details-box{
+    height: 5vh;
+    justify-content: space-between;
+    padding:0px 15px;
+    width: 100%;
+}
+.search-box{
+    padding: 40px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+form,input{
+    outline: none;
+    border:none;
+    width: 85vw;
+    padding: 8px;
+    background-color: var(--grey-color);
+    border-radius: 15px;
+
+}
+input{
+    font-size: 18px;
+  
+}
+.spin-box{
+    height: 20vh;
+    width: 100vw;
+}
+.single-box:hover{
+    box-shadow: -1px 10px 25px -1px rgba(42,39,39,0.64);
+    -webkit-box-shadow: -1px 10px 25px -1px rgba(42,39,39,0.64);
+    -moz-box-shadow: -1px 10px 25px -1px rgba(42,39,39,0.64);
+}
+.image-box2{
+    height: 60vh;
+    width: 40vw;
+}
+.text-box{
+    position: absolute;
+    bottom: 12px;
+    left: 10px;
+    color: white;
+}
+.text-box p:first-child {
+    font-family: var(--location-font); /* Font for the first paragraph */
+  }
+  .text-box p:nth-child(2) {
+    font-family: var(--user-font);
+  }
+.add-single-page{
+    justify-content: space-between;
+    padding: 50px;
+    height: 100vh;
+}
+.content-part{
+    width: 50vw;
+    height:60vh ;
+    line-height: 2;
+}
+.content-part h1:first-child{
+    font-family: var(--heading--font);
+}
+.content-part p:nth-child(2){
+    font-family: var(--user-font);
+}
+.content-part div:nth-child(4){
+    width: 50vw;
+    padding: 20px 0px;
+    gap: 8%;
+}
+button{
+    background-color: var(--grey-color);
+    outline: none;
+    border: none;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 10px;
+   cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-family: var(--link--font);
+}
+a:hover{
+    font-weight: bold;
+}
+button:hover{
+    background-color: var(--grey-hover-color);
+}
+.modal{
+    padding: 30px;
+
+}
+.modal img:first-child{
+    cursor: pointer;
+}
+.modal img:nth-child(2){
+    border-radius: 20px;
+}
+.nav-one{
+    padding: 30px 80px;
+    justify-content: start;
+    gap: 2%;
+    font-family: var(--user-font);
+}
+@media screen and (max-width:1050px) {
+    .image-box,.single-box{
+        height: 50vh;
+        width: 40vw;
+    }
+    .big-box-add{
+        padding: 15px;
+    }
+    .add-single-page{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .content-part,.image-box2{
+        height: 50vh;
+        width: 80vw;
+    }
+    .content-part{
+        height: 30vh;
+    }
+}
+@media screen and (max-width:500px) {
+    .image-box, .single-box,.content-part div:nth-child(4){
+        width: 80vw;
+    }
+    .content-part h1:first-child{
+        font-size: 15px;
+    }
 }
