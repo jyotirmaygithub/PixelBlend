@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
-// import FileSaver from "file-saver";
+import FileSaver from "file-saver";
 import LoadingBar from "react-top-loading-bar";
 import Close from "../Components/close.png"
 
@@ -30,13 +30,13 @@ export default function Singlepage() {
 
   let { description, alt_description, urls, user } = fetcheddata;
 
-  // async function downloadimage() {
-  //   const response = await fetch(urls.full);
-  //   setDownload("Downloading....")
-  //   const blob = await response.blob();
-  //   FileSaver.saveAs(blob, "image.jpg");
-  //   setDownload("Free Download")
-  // }
+  async function downloadimage() {
+    const response = await fetch(urls.full);
+    setDownload("Downloading....")
+    const blob = await response.blob();
+    FileSaver.saveAs(blob, "image.jpg");
+    setDownload("Free Download")
+  }
 
   function clearview() {
     setmodal(true);
@@ -66,7 +66,7 @@ export default function Singlepage() {
             {user && user.portfolio_url}
           </a>
           <div className="universal button-box">
-            {/* <button onClick={downloadimage}>{Download}</button> */}
+            <button onClick={downloadimage}>{Download}</button>
             <button onClick={clearview}>Big View </button>
           </div>
         </div>
