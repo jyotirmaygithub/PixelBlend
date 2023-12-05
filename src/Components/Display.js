@@ -1,4 +1,5 @@
 import React from "react";
+import  download from '../Images/download-op.png'
 import {useNavigate } from "react-router-dom";
 
 export default function Display(props) {
@@ -17,6 +18,9 @@ export default function Display(props) {
           <div className="text-box">
           <p >{user.location}</p>
           <p>{user.name}</p>
+          </div>
+          <div className="download-option">
+            <img src={download} alt="" />
           </div>
         </div>
       </div>
