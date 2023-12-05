@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Extraction from './Extraction'
-import Logo from "./logo.png"
+import Logo from '../Images/logo.png'
 import LoadingBar from 'react-top-loading-bar'
 
 export default function Search() {

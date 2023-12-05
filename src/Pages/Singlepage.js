@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 import FileSaver from "file-saver";
 import LoadingBar from "react-top-loading-bar";
-import Close from "../Components/close.png"
+import Close from '../Images/close.png'
 
 export default function Singlepage() {
   const { id } = useParams();
