@@ -9,7 +9,7 @@ export default function Display(props) {
 
 
   function handlevent(){
-    navigate(`/images/${id}`)
+    navigate(`/images/${id}`);
   }
   return (
       <div key={indexvalue} id={id} onClick={handlevent}className="universal2 single-box">
