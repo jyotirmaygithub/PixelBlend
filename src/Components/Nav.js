@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Wallpaper from "./wallpaper_FILL0_wght400_GRAD200_opsz48.png"
+import Wallpaper from '../Images/wallpaper.png'
 
 export default function Nav() {
   return (
