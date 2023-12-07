@@ -1,56 +1,76 @@
-import React, { useState } from "react";
-import  download from '../Images/download-op.png'
-import downloadprogress from "../Images/downloading-process.svg"
+import React, { useState,useEffect } from "react";
+import download from '../Images/download-op.png';
+import downloadprogress from "../Images/downloading-process.svg";
 import FileSaver from "file-saver";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Display(props) {
-  const [downloadbtn ,setdownloadbtn] = useState(true)
-  const [load ,setload] = useState(false)
+  const [downloadbtn, setdownloadbtn] = useState(true);
+  const [load, setload] = useState(false);
 
-  let {data,indexvalue} = props
-  let navigate = useNavigate()
-  let { id, urls,user } = data;
+  const navigate = useNavigate();
+  const { data, indexvalue } = props;
+  const { id, urls, user } = data;
+
+  useEffect(() => {
+    // Save scroll position when component unmounts
+    const scrollPosition = window.scrollY;
+    sessionStorage.setItem('scrollPosition', scrollPosition.toString());
+
+    // Restore scroll position when component mounts
+    return () => {
+      const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+      if (savedScrollPosition) {
+        window.scrollTo(0, parseInt(savedScrollPosition, 10));
+      }
+    };
+  }, []);
 
 
-  function handlevent(){
-      navigate(`/images/${id}`);
-  }
+  const handleEvent = () => {
+    navigate(`/images/${id}`);
+  };
 
-  async function downloadimage(actualurl) {
+  const downloadImage = async (actualurl) => {
     const response = await fetch(actualurl);
-    setdownloadbtn(false)
-    setload(true)
     const blob = await response.blob();
     FileSaver.saveAs(blob, "image.jpg");
-    setload(false)
-    setdownloadbtn(true)
-  }
-  async function datafetching() {
-    const url = `https://api.unsplash.com/photos/${id}?client_id=${process.env.React_App_wallpaper_app}`;
-    let data = await fetch(url);
-    let fetchdata = await data.json();
-    downloadimage(fetchdata.urls.full)
-  }
-  function downloading(event){
-    event.stopPropagation()
-    console.log(id)
-     datafetching()
-  }
+    setload(false);
+    setdownloadbtn(true);
+  };
+
+  const fetchData = async () => {
+    try {
+      const url = `https://api.unsplash.com/photos/${id}?client_id=${process.env.React_App_wallpaper_app}`;
+      const response = await fetch(url);
+      const fetchdata = await response.json();
+      downloadImage(fetchdata.urls.full);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const downloading = (event) => {
+    setdownloadbtn(false);
+    setload(true);
+    event.stopPropagation();
+    console.log(id);
+    fetchData();
+  };
+
   return (
-      <div key={indexvalue} id={id} onClick={handlevent}className="universal2 single-box">
-        <div className="image-box">
-          <img className="for-image" src={urls.regular} alt="images" />
-          <div className="text-box">
-          <p >{user.location}</p>
+    <div key={indexvalue} id={id} onClick={handleEvent} className="universal2 single-box">
+      <div className="image-box">
+        <img className="for-image" src={urls.regular} alt="images" />
+        <div className="text-box">
+          <p>{user.location}</p>
           <p>{user.name}</p>
-          </div>
-          <div onClick={downloading} className="download-option">
-            {downloadbtn && <img src={download} alt="" />}
-            {load && <img src={downloadprogress} alt="downloading" />}
-          </div>
+        </div>
+        <div onClick={downloading} className="download-option">
+          {downloadbtn && <img src={download} alt="" />}
+          {load && <img src={downloadprogress} alt="downloading" />}
         </div>
       </div>
-
+    </div>
   );
 }
