@@ -22,6 +22,7 @@ export default function Singlepage() {
       let data = await fetch(url);
       settopbar(40);
       let fetchdata = await data.json();
+      console.log(fetchdata)
       settopbar(70);
       setfetcheddata(fetchdata);
       settopbar(100);
