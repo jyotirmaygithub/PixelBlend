@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import  download from '../Images/download-op.png'
+import downloadprogress from "../Images/downloading-process.svg"
 import FileSaver from "file-saver";
 import {useNavigate } from "react-router-dom";
 
 export default function Display(props) {
-  const [arrdata ,setarrdata] = useState(null)
+  const [downloadbtn ,setdownloadbtn] = useState(true)
+  const [load ,setload] = useState(false)
+
   let {data,indexvalue} = props
   let navigate = useNavigate()
   let { id, urls,user } = data;
@@ -14,20 +17,20 @@ export default function Display(props) {
       navigate(`/images/${id}`);
   }
 
-  async function downloadimage() {
-    const response = await fetch(arrdata);
-    // setDownload("Downloading....")
+  async function downloadimage(actualurl) {
+    const response = await fetch(actualurl);
+    setdownloadbtn(false)
+    setload(true)
     const blob = await response.blob();
     FileSaver.saveAs(blob, "image.jpg");
-    // setDownload("Free Download")
+    setload(false)
+    setdownloadbtn(true)
   }
   async function datafetching() {
     const url = `https://api.unsplash.com/photos/${id}?client_id=${process.env.React_App_wallpaper_app}`;
     let data = await fetch(url);
     let fetchdata = await data.json();
-    setarrdata(fetchdata.urls.full)
-    console.log(fetchdata.urls.full)
-    downloadimage()
+    downloadimage(fetchdata.urls.full)
   }
   function downloading(event){
     event.stopPropagation()
@@ -43,7 +46,8 @@ export default function Display(props) {
           <p>{user.name}</p>
           </div>
           <div onClick={downloading} className="download-option">
-            <img src={download} alt="" />
+            {downloadbtn && <img src={download} alt="" />}
+            {load && <img src={downloadprogress} alt="downloading" />}
           </div>
         </div>
       </div>
