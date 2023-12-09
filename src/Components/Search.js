@@ -1,13 +1,14 @@
 import React,{useState} from 'react'
 import Extraction from './Extraction'
 import Logo from '../Images/logo.png'
+import { UserEnteredInput } from '../Context/SearchContext'
 import LoadingBar from 'react-top-loading-bar'
 
 export default function Search() {
-    const [inputvalue , setinputvalue] = useState('')
+    const [SearchInput , setSearchInput] = UserEnteredInput()
     const [progressbar , setprogressbar]  = useState(0)
     function inputchange(e){
-        setinputvalue(e)
+        setSearchInput(e)
     }
     function enterkey(e){
       e.preventDefault()
@@ -24,10 +25,10 @@ export default function Search() {
         <div className='universal search-box'>
       <form className='universal' action="">
         <img src={Logo} alt="" />
-        <input type="text" onSubmit={enterkey} value={inputvalue} onChange={(e)=>inputchange(e.target.value)} placeholder='Search Image' name="" id="" />
+        <input type="text" onSubmit={enterkey} value={SearchInput} onChange={(e)=>inputchange(e.target.value)} placeholder='Search Image' name="" id="" />
       </form>
         </div>
-      <Extraction settingtopbar= {setprogressbar} inputwords={inputvalue}/>
+      {/* <Extraction settingtopbar= {setprogressbar} inputwords={SearchInput}/> */}
     </div>
   )
 }
