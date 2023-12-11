@@ -1,18 +1,21 @@
+// App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Singlepage from "./Pages/Singlepage";
-import Nav from "./Components/Nav";
+import { SearchInputFun } from "./Context/SearchContext" 
 import Home from "./Pages/Home";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Nav/> */}
-        <Routes>
-          <Route exact path="*" element={<Home/>}></Route>
-          <Route  path="/images/:id" element={<Singlepage />}></Route>
-        </Routes>
+        <SearchInputFun>
+          {/* <Home/> */}
+          <Routes>
+            <Route exact path="*" element={<Home />} />
+            <Route path="/images/:id" element={<Singlepage />} />
+          </Routes>
+        </SearchInputFun>
       </Router>
     </div>
   );

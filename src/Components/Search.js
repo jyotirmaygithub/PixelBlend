@@ -5,8 +5,8 @@ import { UserEnteredInput } from '../Context/SearchContext'
 import LoadingBar from 'react-top-loading-bar'
 
 export default function Search() {
-    const [SearchInput , setSearchInput] = UserEnteredInput()
-    const [progressbar , setprogressbar]  = useState(0)
+    const {SearchInput , setSearchInput} = UserEnteredInput()
+    // const [progressbar , setprogressbar]  = useState(0)
     function inputchange(e){
         setSearchInput(e)
     }
@@ -15,13 +15,13 @@ export default function Search() {
     }
   return (
     <div>
-      <LoadingBar
+      {/* <LoadingBar
       color='#000000'
       height={3}
       progress={progressbar}
       onLoaderFinished={()=>{setprogressbar(0)}}
       
-      />
+      /> */}
         <div className='universal search-box'>
       <form className='universal' action="">
         <img src={Logo} alt="" />

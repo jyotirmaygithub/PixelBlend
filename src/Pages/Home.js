@@ -1,12 +1,14 @@
 import React from 'react'
 import Search from '../Components/Search'
-import Logo from "../Components/Nav"
+import SiteLogo from "../Components/MainLogo"
+import ShowingData from "../Components/Extraction"
 
 export default function Home() {
   return (
     <div>
-      <Logo/>
+      <SiteLogo/>
       <Search/>
+      <ShowingData/>
     </div>
   )
 }

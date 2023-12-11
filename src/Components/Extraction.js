@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Display from "./Display";
 import Spinner from "./Spinner";
+import { UserEnteredInput } from "../Context/SearchContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function Extraction(props) {
-  let { inputwords, settingtopbar } = props;
+export default function Extraction() {
+  // let { inputwords, settingtopbar } = props;
+  const {SearchInput}= UserEnteredInput();
   const [page, setpage] = useState(1);
   const [newdata, setnewdata] = useState([]);
   const [inputvalue, newinputvalue] = useState("");
@@ -12,44 +14,45 @@ export default function Extraction(props) {
   const api_key = process.env.React_App_wallpaper_app;
 
   useEffect(() => {
-    newinputvalue(inputwords);
-  }, [inputwords]);
+    newinputvalue(SearchInput);
+  }, [SearchInput]);
 
+  console.log("am i able to get searching = ", SearchInput)
   useEffect(() => {
     fetchdata();
     async function fetchdata() {
       let url;
-      settingtopbar(20);
+      // settingtopbar(20);
       try {
         if (inputvalue === "") {
           setloading(true);
-          settingtopbar(40);
+          // settingtopbar(40);
           url = `https://api.unsplash.com/photos/?page=${page}&client_id=${api_key}`;
           let fetchdata = await fetch(url);
-          settingtopbar(60);
+          // settingtopbar(60);
           let data = await fetchdata.json();
-          settingtopbar(80);
+          // settingtopbar(80);
           setnewdata(data);
           setloading(false);
-          settingtopbar(100);
+          // settingtopbar(100);
         } else {
           setloading(true);
-          settingtopbar(40);
+          // settingtopbar(40);
           url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputvalue}&client_id=${api_key}`;
-          settingtopbar(60);
+          // settingtopbar(60);
           let fetchdata = await fetch(url);
-          settingtopbar(80);
+          // settingtopbar(80);
           let data = await fetchdata.json();
           setnewdata(data.results);
-          settingtopbar(100);
+          // settingtopbar(100);
           setloading(false);
         }
       } catch (error) {
         console.log("getting error, not able to fetch data");
-        settingtopbar(60);
+        // settingtopbar(60);
       }
     }
-  }, [inputvalue]);
+  }, [SearchInput]);
 
   async function fetchmoredata() {
     let url;
