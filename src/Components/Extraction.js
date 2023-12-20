@@ -6,9 +6,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Extraction() {
   const {SearchInput}= UserEnteredInput();
+  const {newdata ,setnewdata} = UserEnteredInput();
   const [page, setpage] = useState(1);
-  const [newdata, setnewdata] = useState([]);
-  const api_key = process.env.React_App_wallpaper_app;
+  const api_key = "";
 
   useEffect(() => {
     fetchdata();
