@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Display from "./Display";
 import Spinner from "./Spinner";
 import { UserEnteredInput } from "../Context/SearchContext";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -7,7 +8,7 @@ export default function Extraction() {
   const {SearchInput}= UserEnteredInput();
   const {newdata ,setnewdata} = UserEnteredInput();
   const [page, setpage] = useState(1);
-  const api_key = "";
+  const api_key = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     fetchdata();
@@ -66,6 +67,9 @@ export default function Extraction() {
         loader={<Spinner />}
         scrollThreshold={0.9}
       >
+        {newdata.map((e, index) => {
+          return <Display key={index} data={e} indexvalue={index} />;
+        })}
       </InfiniteScroll>}
     </>
   );
