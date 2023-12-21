@@ -17,13 +17,25 @@ export default function Display(props) {
     navigate(`/images/${id}`);
   };
 
-  async function downloadImage(actualurl){
-    const response = await fetch(actualurl);
-    const blob = await response.blob();
-    FileSaver.saveAs(blob, "image.jpg");
-    setload(false);
-    setdownloadbtn(true);
-  };
+  async function downloadImage(actualurl) {
+    try {
+      setload(true);
+      setdownloadbtn(false);
+      const response = await fetch(actualurl);
+      const blob = await response.blob();
+  
+      await new Promise(resolve => setTimeout(resolve, 1000)); 
+      FileSaver.saveAs(blob, "image.jpg");
+  
+      // Simulate a delay before updating states again (replace this with actual post-download logic)
+      setload(false);
+      setdownloadbtn(true);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+      setload(false);
+      setdownloadbtn(false);
+    }
+  }
 
   async function fetchData(){
     try {
