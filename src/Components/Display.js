@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import download from '../Images/download-op.png';
 import downloadprogress from "../Images/downloading-process.svg";
 import FileSaver from "file-saver";
@@ -11,37 +11,35 @@ export default function Display(props) {
   const navigate = useNavigate();
   const { data, indexvalue } = props;
   const { id, urls, user } = data;
-
-  useEffect(() => {
-    // Save scroll position when component unmounts
-    const scrollPosition = window.scrollY;
-    sessionStorage.setItem('scrollPosition', scrollPosition.toString());
-
-    // Restore scroll position when component mounts
-    return () => {
-      const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-      if (savedScrollPosition) {
-        window.scrollTo(0, parseInt(savedScrollPosition, 10));
-      }
-    };
-  }, []);
-
-
+  const api_key = process.env.REACT_APP_API_KEY
+  
   const handleEvent = () => {
     navigate(`/images/${id}`);
   };
 
-  const downloadImage = async (actualurl) => {
-    const response = await fetch(actualurl);
-    const blob = await response.blob();
-    FileSaver.saveAs(blob, "image.jpg");
-    setload(false);
-    setdownloadbtn(true);
-  };
-
-  const fetchData = async () => {
+  async function downloadImage(actualurl) {
     try {
-      const url = `https://api.unsplash.com/photos/${id}?client_id=${process.env.React_App_wallpaper_app}`;
+      setload(true);
+      setdownloadbtn(false);
+      const response = await fetch(actualurl);
+      const blob = await response.blob();
+  
+      await new Promise(resolve => setTimeout(resolve, 1000)); 
+      FileSaver.saveAs(blob, "image.jpg");
+  
+      // Simulate a delay before updating states again (replace this with actual post-download logic)
+      setload(false);
+      setdownloadbtn(true);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+      setload(false);
+      setdownloadbtn(false);
+    }
+  }
+
+  async function fetchData(){
+    try {
+      const url = `https://api.unsplash.com/photos/${id}?client_id=${api_key}`;
       const response = await fetch(url);
       const fetchdata = await response.json();
       downloadImage(fetchdata.urls.full);
@@ -54,7 +52,6 @@ export default function Display(props) {
     setdownloadbtn(false);
     setload(true);
     event.stopPropagation();
-    console.log(id);
     fetchData();
   };
 

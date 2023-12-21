@@ -13,7 +13,7 @@ export default function Singlepage() {
   const [Download ,setDownload] = useState("Free Download")
 
   useEffect(() => {
-    const url = `https://api.unsplash.com/photos/${id}?client_id=${process.env.React_App_wallpaper_app}`;
+    const url = `https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_API_KEY}`;
     console.log(url)
 
     fetchdata();
@@ -31,14 +31,24 @@ export default function Singlepage() {
 
   let { description, alt_description, urls, user } = fetcheddata;
 
-  async function downloadimage() {
-    const response = await fetch(urls.full);
-    setDownload("Downloading....")
-    const blob = await response.blob();
-    FileSaver.saveAs(blob, "image.jpg");
-    setDownload("Free Download")
+  async function downloadImage() {
+    try {
+      setDownload("Downloading....");
+      const response = await fetch(urls.full); 
+      const blob = await response.blob();
+  
+      // Simulate a delay if needed (replace this with actual saving logic)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+      FileSaver.saveAs(blob, "image.jpg");
+  
+      setDownload("Free Download");
+    } catch (error) {
+      console.error("Error downloading image:", error);
+      setDownload("Download Failed");
+    }
   }
-
+  
   function clearview() {
     setmodal(true);
   }
@@ -67,7 +77,7 @@ export default function Singlepage() {
             {user && user.portfolio_url}
           </a>
           <div className="universal button-box">
-            <button onClick={downloadimage}>{Download}</button>
+            <button onClick={downloadImage}>{Download}</button>
             <button onClick={clearview}>Big View </button>
           </div>
         </div>
