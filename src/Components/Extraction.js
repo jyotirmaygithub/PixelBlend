@@ -8,6 +8,7 @@ export default function Extraction() {
   const {SearchInput}= UserEnteredInput();
   const {newdata ,setnewdata} = UserEnteredInput();
   const [page, setpage] = useState(1);
+  const [Loading ,setLoading] = useState(false)
   const api_key = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
@@ -16,14 +17,18 @@ export default function Extraction() {
       let url;
       try {
         if (SearchInput === "") {
+          setLoading(true)
           url = `https://api.unsplash.com/photos/?page=${page}&client_id=${api_key}`;
           let fetchdata = await fetch(url);
           let data = await fetchdata.json();
+          setLoading(false)
           setnewdata(data);
         } else {
+          setLoading(true)
           url = `https://api.unsplash.com/search/photos?page=${page}&query=${SearchInput}&client_id=${api_key}`;
           let fetchdata = await fetch(url);
           let data = await fetchdata.json();
+          setLoading(false)
           setnewdata(data.results);
         }
       } catch (error) {
@@ -67,6 +72,7 @@ export default function Extraction() {
         loader={<Spinner />}
         scrollThreshold={0.9}
       >
+        {Loading && <Spinner/>}
         {newdata.map((e, index) => {
           return <Display key={index} data={e} indexvalue={index} />;
         })}
