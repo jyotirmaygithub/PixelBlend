@@ -1,44 +1,70 @@
-# <<----Learning throughtout the projects----->>
+# Getting Started with Create React App
 
-# <<-----notes will be here for future reference------>>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# command -- to download  react-infinite-scroll-component
-npm install react-infinite-scroll-component
+## Available Scripts
 
-# React router ---
- This process allows React to fetch data as the user navigates between different views or pages without causing a full page reload. The use of asynchronous data fetching techniques ensures that the application remains interactive and doesn't block the user while waiting for data.
+In the project directory, you can run:
 
-# direct access of the id is possible through the use of useparams hook
+### `npm start`
 
-useparams is used to get the value of some variable in another page without headache
-you just need to import useparams from react router dom
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-# {urls && <img src={urls.full} alt="" />} 
-this above code usefull, when we need to render value only if it is not null or undefined 
- If urls is falsy (e.g., null or undefined), the entire expression will evaluate to falsy, and nothing will be rendered. This is a common pattern in React to conditionally render elements based on the existence of certain data.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-# .text-box p:first-child 
-want to target the child of a div, then dont write class again and again 
-instead use parent and child realtion  
+### `npm test`
 
-#  .text-box p:first-child {
-#    font-family: var(--location-font); /* Font for the first paragraph */
-#  }
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-# use of modal 
- this is a npm package which can be helpful in poping up the image 
-# (download guideline) =====> npm install react-modal
+### `npm run build`
 
-# file-saver
-it can be usefull in letting the user to download the files in their desktop
-# i am providing a code below to use
-async function downloadimage(){
-  const response = await fetch(urls.full);
-  const blob = await response.blob();
-  FileSaver.saveAs(blob, 'image.jpg');
-}
-# download command =====> npm install file-saver (npm package)
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# caution --- hide api key
-hide api key -- use environment variable 
-🏗️ create .env.local folder  : create a kind of a variable (apikey_for_React_project  = "write api key in the form of string ")
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
