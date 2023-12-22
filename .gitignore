@@ -13,6 +13,8 @@
 
 # Miscellaneous
 .DS_Store
+notes.txt
+
 
 # Environment variables
 .env
