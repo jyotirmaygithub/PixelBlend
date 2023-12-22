@@ -161,13 +161,25 @@ button:hover{
 .download-option{
     background-color: white;
     position: absolute;
-    /* top: 0; */
     bottom: 20px;
     right: 15px;
     padding: 5px;
     border-radius: 10px;
 
 }
+.uparrow{
+    height: 60px;
+    color: black;
+}
+.scroll-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    left: 40px;
+    padding: 3px;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+  }
 @media screen and (max-width:1050px) {
     .image-box,.single-box{
         height: 50vh;
@@ -196,3 +208,5 @@ button:hover{
         font-size: 15px;
     }
 }
+
+  
